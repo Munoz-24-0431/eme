@@ -1,1 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justine Muñoz - EDM Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --space-dark: #0a0b1a;
+            --space-light: #2d3252;
+            --star-color: #ffffff;
+            --accent-purple: #9d4edd;
+            --accent-blue: #48bfe3;
+            --text-color: #e2e2e2;
+            --link-color: #a991ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--space-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Milky Way Animation */
+        .milky-way {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 130px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 160px 120px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 200px 150px, #fff, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 250px 180px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 300px 220px, #ddd, rgba(0,0,0,0));
+            background-repeat: repeat;
+            animation: milkyWayMove 300s linear infinite;
+            opacity: 0.8;
+        }
+
+        .galaxy {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -3;
+            background: 
+                radial-gradient(ellipse at center, rgba(157, 78, 221, 0.4) 0%, rgba(0,0,0,0) 70%),
+                radial-gradient(ellipse at center, rgba(72, 191, 227, 0.4) 0%, rgba(0,0,0,0) 70%),
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(0,0,0,0) 60%),
+                radial-gradient(ellipse at center, rgba(157, 78, 221, 0.2) -20%, rgba(0,0,0,0) 60%);
+            transform: scale(2.5);
+            animation: galaxyRotate 180s linear infinite;
+        }
+
+        .cosmic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at center, #1a1b4b 0%, #0a0b1a 100%),
+                linear-gradient(45deg, rgba(157, 78, 221, 0.2) 0%, rgba(72, 191, 227, 0.2) 100%),
+                radial-gradient(circle at 20% 80%, rgba(157, 78, 221, 0.3) 0%, rgba(0,0,0,0) 40%),
+                radial-gradient(circle at 80% 20%, rgba(72, 191, 227, 0.3) 0%, rgba(0,0,0,0) 40%);
+            opacity: 0.95;
+            animation: backgroundPulse 15s ease-in-out infinite;
+        }
+
+        /* Stars Animation */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: var(--star-color);
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        /* Cosmic Dust */
+        .cosmic-dust {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            animation: dust 20s linear infinite;
+        }
+
+        @keyframes dust {
+            from { transform: translateY(-100vh) rotate(0deg); }
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .profile-section {
+            background: rgba(45, 50, 82, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .profile-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at center,
+                rgba(157, 78, 221, 0.1),
+                transparent 70%
+            );
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.6s ease;
+            pointer-events: none;
+        }
+
+        .profile-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg,
+                transparent 40%,
+                rgba(72, 191, 227, 0.1) 45%,
+                rgba(157, 78, 221, 0.1) 50%,
+                transparent 55%);
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+            pointer-events: none;
+        }
+
+        .profile-section:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 10px 30px rgba(157, 78, 221, 0.2),
+                0 0 50px rgba(72, 191, 227, 0.1);
+            border-color: rgba(157, 78, 221, 0.4);
+            background: rgba(45, 50, 82, 0.5);
+        }
+
+        .profile-section:hover::before {
+            opacity: 1;
+            transform: scale(1) rotate(180deg);
+        }
+
+        .profile-section:hover::after {
+            transform: translateX(100%);
+        }
+
+        .profile-section h2 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-section h2 i {
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .profile-section:hover h2 i {
+            transform: rotate(360deg);
+            color: var(--accent-purple);
+        }
+
+        .profile-section p {
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+            padding: 1rem;
+            border-radius: 10px;
+            background: rgba(45, 50, 82, 0.3);
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            transform: translateX(0);
+        }
+
+        .profile-section p:hover {
+            background: rgba(157, 78, 221, 0.1);
+            border-color: rgba(72, 191, 227, 0.2);
+            transform: translateX(10px);
+            box-shadow: 
+                -5px 5px 15px rgba(157, 78, 221, 0.1),
+                0 0 20px rgba(72, 191, 227, 0.05);
+        }
+
+        /* Floating particles animation */
+        .profile-section .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: particleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+                transform: translate(var(--x), var(--y)) scale(1.2);
+            }
+            100% {
+                transform: translate(calc(var(--x) * 2), calc(var(--y) * 2)) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Contact Info Styles */
+        .contact-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(157, 78, 221, 0.2);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem;
+            background: rgba(45, 50, 82, 0.3);
+            border-radius: 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item:hover {
+            background: rgba(157, 78, 221, 0.2);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 5px 15px rgba(157, 78, 221, 0.2),
+                0 0 30px rgba(72, 191, 227, 0.1);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(72, 191, 227, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover i {
+            transform: scale(1.2);
+            color: var(--accent-purple);
+            background: rgba(157, 78, 221, 0.2);
+        }
+
+        .contact-item span {
+            font-size: 1rem;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(157, 78, 221, 0.5); }
+            50% { text-shadow: 0 0 40px rgba(72, 191, 227, 0.8); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(157, 78, 221, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(72, 191, 227, 0.3);
+            }
+        }
+
+        /* Project Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .project-card {
+            background: rgba(45, 50, 82, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 10px 20px rgba(157, 78, 221, 0.2),
+                0 0 30px rgba(72, 191, 227, 0.3),
+                0 0 50px rgba(157, 78, 221, 0.1);
+            border-color: rgba(157, 78, 221, 0.5);
+            background: rgba(45, 50, 82, 0.5);
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                60deg,
+                transparent,
+                rgba(157, 78, 221, 0.1),
+                rgba(72, 191, 227, 0.1),
+                transparent
+            );
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover::after {
+            transform: translateX(0);
+        }
+
+        .project-card h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        .project-card a {
+            display: inline-block;
+            color: var(--text-color);
+            text-decoration: none;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--accent-purple);
+            border-radius: 25px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: rgba(157, 78, 221, 0.1);
+            z-index: 1;
+        }
+
+        .project-card a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        .project-card a:hover {
+            color: white;
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.4);
+            transform: translateY(-3px);
+            border-color: transparent;
+        }
+
+        .project-card a:hover::before {
+            width: 100%;
+        }
+
+        .project-card p {
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        /* Education Section */
+        .education-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            background: rgba(45, 50, 82, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent-purple);
+            transform: translateX(-50px);
+            opacity: 0;
+            animation: slideIn 0.5s ease forwards;
+            position: relative;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px) scale(1.01);
+            background: rgba(45, 50, 82, 0.5);
+            box-shadow: 
+                -5px 0 20px rgba(157, 78, 221, 0.3),
+                0 0 30px rgba(72, 191, 227, 0.2);
+            border-left-width: 8px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(157, 78, 221, 0.1),
+                transparent
+            );
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .timeline-item:hover::after {
+            transform: translateX(0);
+        }
+
+        .timeline-item::before {
+            content: '●';
+            position: absolute;
+            left: -2.5rem;
+            color: var(--accent-purple);
+            font-size: 1.5rem;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(45, 50, 82, 0.8);
+            padding: 1rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+            border: 1px solid rgba(157, 78, 221, 0.3);
+        }
+
+        .music-controls button {
+            background: transparent;
+            border: 1px solid var(--accent-purple);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .music-controls button:hover {
+            background: var(--accent-purple);
+            color: var(--space-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .name-title {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .music-player {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.5rem;
+            }
+
+            .timeline-item {
+                margin-left: 0;
+            }
+
+            .social-links {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item {
+                padding: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            color: var(--accent-purple);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Enhanced Profile Picture Styles */
+        .profile-picture-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            padding: 8px;
+            background: transparent;
+            z-index: 2;
+        }
+
+        /* Cosmic Ring Effect */
+        .profile-picture-container::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, 
+                rgba(157, 78, 221, 0.1),
+                rgba(72, 191, 227, 0.1),
+                rgba(157, 78, 221, 0.1)
+            );
+            z-index: 1;
+            animation: cosmicRing 8s linear infinite;
+        }
+
+        @keyframes cosmicRing {
+            0% {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+                opacity: 0.3;
+            }
+        }
+
+        /* Stardust Particles */
+        .profile-picture-container::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, var(--accent-purple) 50%, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, var(--accent-blue) 50%, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, var(--accent-purple) 50%, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, var(--accent-blue) 50%, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, var(--accent-purple) 50%, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, var(--accent-blue) 50%, rgba(0,0,0,0));
+            background-repeat: repeat;
+            opacity: 0.3;
+            z-index: 1;
+            animation: stardustRotate 20s linear infinite;
+        }
+
+        @keyframes stardustRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-picture {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--space-dark);
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.3);
+        }
+
+        /* Enhanced Orbit Animation */
+        .profile-picture-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 220px;
+            height: 220px;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            border-radius: 50%;
+            animation: orbit 20s linear infinite;
+            z-index: 1;
+        }
+
+        /* Multiple Orbital Rings */
+        .profile-picture-orbit::before,
+        .profile-picture-orbit::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(72, 191, 227, 0.2);
+            animation: pulseOrbit 4s ease-in-out infinite;
+        }
+
+        .profile-picture-orbit::before {
+            inset: -10px;
+            animation-delay: -2s;
+        }
+
+        .profile-picture-orbit::after {
+            inset: -20px;
+            animation-delay: -1s;
+        }
+
+        @keyframes pulseOrbit {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.4;
+            }
+        }
+
+        .orbit-star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-purple);
+            opacity: 0.5;
+            animation: starTwinkle 2s ease-in-out infinite;
+        }
+
+        /* Additional Orbital Stars */
+        .orbit-star:nth-child(1) { animation-delay: 0s; }
+        .orbit-star:nth-child(2) { animation-delay: 0.5s; }
+        .orbit-star:nth-child(3) { animation-delay: 1s; }
+        .orbit-star:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes starTwinkle {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+            opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Nebula Glow Effect */
+        .profile-picture-container .nebula-glow {
+            position: absolute;
+            inset: -30px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at center,
+                rgba(157, 78, 221, 0.1) 0%,
+                rgba(72, 191, 227, 0.1) 50%,
+                transparent 70%
+            );
+            filter: blur(10px);
+            z-index: 0;
+            animation: nebulaGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes nebulaGlow {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+
+        /* Meteor Shower Animation */
+        .meteor-shower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .meteor {
+            position: absolute;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+            animation: meteor linear;
+            transform: rotate(-45deg);
+            filter: blur(1px);
+            box-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(157, 78, 221, 0.4);
+        }
+
+        .meteor::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: translateX(-100%);
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: meteorFlash 1s ease-in-out infinite;
+        }
+
+        @keyframes meteorFlash {
+            0% { transform: translateX(-100%) }
+            50% { transform: translateX(0%) }
+            100% { transform: translateX(100%) }
+        }
+
+        @keyframes meteor {
+            0% {
+                transform: translate(calc(var(--startX) * 1px), calc(var(--startY) * 1px)) rotate(var(--angle));
+            opacity: 1;
+            }
+            20% {
+                opacity: 1;
+            }
+            60% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(calc(var(--endX) * 1px), calc(var(--endY) * 1px)) rotate(var(--angle));
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Milky Way */
+        .nebula {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -4;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(157, 78, 221, 0.2) 0%, rgba(0,0,0,0) 50%),
+                radial-gradient(circle at 70% 50%, rgba(72, 191, 227, 0.2) 0%, rgba(0,0,0,0) 50%),
+                radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.1) 0%, rgba(0,0,0,0) 40%);
+            animation: nebulaFloat 30s ease-in-out infinite alternate;
+        }
+
+        @keyframes nebulaFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(2%, 2%) scale(1.05);
+            }
+            100% {
+                transform: translate(-2%, -2%) scale(0.95);
+            }
+        }
+
+        .project-card:hover h3,
+        .timeline-item:hover h3 {
+            color: var(--accent-purple);
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
+            transform: translateX(5px);
+            transition: all 0.3s ease;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.9), rgba(157, 78, 221, 0.5) 70%, transparent);
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s;
+            box-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(157, 78, 221, 0.4);
+        }
+
+        .custom-cursor::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(to bottom, transparent, rgba(157, 78, 221, 0.3), transparent);
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .custom-cursor.hover {
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.9), rgba(72, 191, 227, 0.5) 70%, transparent);
+        }
+
+        /* Enhanced Meteor Shower */
+        .meteor.large {
+            width: 80px !important;
+            height: 3px !important;
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.9),
+                0 0 40px rgba(157, 78, 221, 0.6);
+        }
+
+        h2 i, h3 i {
+            margin-right: 0.5rem;
+            color: var(--accent-purple);
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Project Section Icons */
+        .project-card h3 i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover h3 i {
+            color: var(--accent-purple);
+            transform: scale(1.2);
+        }
+
+        .projects h2 i {
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        .projects h3 i {
+            font-size: 1.3rem;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        /* Enhanced Contact Section Styles */
+        .contact-section {
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-card {
+            background: rgba(45, 50, 82, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 3;
+            box-shadow: 
+                0 10px 30px rgba(157, 78, 221, 0.1),
+                0 0 50px rgba(72, 191, 227, 0.05);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .contact-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent,
+                var(--accent-purple),
+                var(--accent-blue),
+                transparent
+            );
+            border-radius: 3px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            grid-auto-rows: 1fr;
+        }
+
+        .contact-detail {
+            background: rgba(45, 50, 82, 0.4);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1;
+            height: 100%;
+            min-height: 120px;
+        }
+
+        .contact-detail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                rgba(157, 78, 221, 0.1),
+                rgba(72, 191, 227, 0.1)
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .contact-detail::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at center,
+                rgba(157, 78, 221, 0.2),
+                transparent 70%
+            );
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+
+        .contact-detail:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(157, 78, 221, 0.4);
+            box-shadow: 
+                0 10px 20px rgba(157, 78, 221, 0.2),
+                0 0 30px rgba(72, 191, 227, 0.1);
+        }
+
+        .contact-detail:hover::before {
+            opacity: 1;
+        }
+
+        .contact-detail:hover::after {
+            opacity: 1;
+            transform: scale(1) rotate(180deg);
+        }
+
+        .contact-detail i {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(72, 191, 227, 0.1);
+            border-radius: 50%;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-detail:hover i {
+            transform: scale(1.1) rotate(360deg);
+            color: var(--accent-purple);
+            background: rgba(157, 78, 221, 0.2);
+        }
+
+        .detail-info {
+            flex: 1;
+        }
+
+        .detail-info h4 {
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .detail-info span {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .contact-detail:hover .detail-info h4 {
+            color: var(--accent-purple);
+        }
+
+        .contact-detail:hover .detail-info span {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        /* Glowing effect for contact section */
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at 50% 50%,
+                rgba(157, 78, 221, 0.1),
+                transparent 70%
+            );
+            opacity: 0.5;
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 1rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            .contact-detail {
+                padding: 1.2rem;
+            }
+        }
+
+        /* Modal Styles */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 11, 26, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            animation: modalFadeIn 0.3s ease forwards;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-purple);
+            transform: rotate(90deg);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="milky-way"></div>
+    <div class="galaxy"></div>
+    <div class="nebula"></div>
+    <div class="meteor-shower"></div>
+    <div class="cosmic-background"></div>
+    <div class="stars"></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="profile-picture-container">
+                <div class="nebula-glow"></div>
+                <div class="profile-picture-orbit">
+                    <div class="orbit-star" style="top: 0; left: 50%;"></div>
+                    <div class="orbit-star" style="bottom: 0; left: 50%;"></div>
+                    <div class="orbit-star" style="left: 0; top: 50%;"></div>
+                    <div class="orbit-star" style="right: 0; top: 50%;"></div>
+                </div>
+                <img src="https://ibb.co/bgzvSd9Q" 
+                     class="profile-picture" 
+                     alt="Justine Muñoz">
+            </div>
+            <h1 class="name-title">Justine Muñoz</h1>
+            <p class="subtitle">Enterprise Data Management Portfolio</p>
+        </header>
+
+        <section class="profile-section">
+            <h2><i class="fas fa-user-circle"></i> About Me</h2>
+            <p>Hi there! I'm Justine Muñoz, an 18-year-old aspiring IT professional from Angeles City, Pampanga. Currently pursuing a Bachelor of Science in Information Systems at the City College of Angeles.</p>
+            <p>I'm passionate about data management, system analysis, and finding efficient ways to manage and utilize data in real-world applications. When I'm not immersed in tech, I love listening to R&B and pop songs, especially from SZA and Ariana Grande.</p>
+        </section>
+
+        <section class="education-timeline">
+            <h2><i class="fas fa-graduation-cap"></i> Education Journey</h2>
+            <div class="timeline-item">
+                <h3>Bachelor of Science in Information Systems</h3>
+                <p>City College of Angeles - Ongoing</p>
+            </div>
+            <div class="timeline-item">
+                <h3>High School</h3>
+                <p>Gov. Rafael L. Lazatin Integrated School</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Elementary</h3>
+                <p>Pulung Cacutud Elementary School</p>
+            </div>
+        </section>
+
+        <section class="projects">
+            <h2><i class="fas fa-laptop-code"></i> My Projects</h2>
+            <h3><i class="fas fa-tasks"></i> Midterm Projects</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3><i class="fas fa-table"></i> Data Cleaning and Preparation using Excel</h3>
+                    <p>Midterm Lab Task 1</p>
+                    <a href="https://munoz-24-0431.github.io/Midterm-Lab-Task-1/" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3><i class="fas fa-database"></i> Data Cleaning and Preparation using Power Query</h3>
+                    <p>Midterm Lab Task 2</p>
+                    <a href="https://munoz-24-0431.github.io/Midterm-Lab-Task-2/" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3><i class="fas fa-chart-bar"></i> Creating Pivot Table and Dashboard</h3>
+                    <p>Midterm Lab Task 3</p>
+                    <a href="https://munoz-24-0431.github.io/Midterm-Lab-Task-3/" target="_blank">View Project</a>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-star"></i> Final Projects</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3><i class="fas fa-server"></i> MySQL Basics</h3>
+                    <p>Final Lab Task 1</p>
+                    <a href="https://munoz-24-0431.github.io/Finals-Lab-Task-1-/" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3><i class="fas fa-project-diagram"></i> Transforming ER Model to Relational Tables</h3>
+                    <p>Final Lab Task 2</p>
+                    <a href="https://munoz-24-0431.github.io/Finals-Lab-Task-2/" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3><i class="fas fa-table"></i> Table Manipulation</h3>
+                    <p>Final Lab Task 3</p>
+                    <a href="https://munoz-24-0431.github.io/Finals-Lab-Task-3/" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3><i class="fas fa-database"></i> Using MYSQL Clause</h3>
+                    <p>Final Lab Task 3.1</p>
+                    <a href="https://munoz-24-0431.github.io/Finals-Lab-Task-3.1/" target="_blank">View Project</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <h2><i class="fas fa-paper-plane"></i> Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <i class="fas fa-id-card"></i>
+                        <h3>Contact Details</h3>
+                    </div>
+                    <div class="contact-grid">
+                        <a href="tel:09365451698" class="contact-detail">
+                            <i class="fas fa-phone-alt"></i>
+                            <div class="detail-info">
+                                <h4>Phone</h4>
+                                <span>09365451698</span>
+                            </div>
+                        </a>
+                        <a href="mailto:jmunoz24-0431@cca.edu.ph" class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div class="detail-info">
+                                <h4>Email</h4>
+                                <span>jmunoz24-0431@cca.edu.ph</span>
+                            </div>
+                        </a>
+                        <a href="https://www.facebook.com/share/15R5hKrsNs/" target="_blank" class="contact-detail">
+                            <i class="fab fa-facebook"></i>
+                            <div class="detail-info">
+                                <h4>Facebook</h4>
+                                <span>Visit Profile</span>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/j.thsisnvrtht/" target="_blank" class="contact-detail">
+                            <i class="fab fa-instagram"></i>
+                            <div class="detail-info">
+                                <h4>Instagram</h4>
+                                <span>@j.thsisnvrtht</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="music-player">
+        <div class="music-controls">
+            <iframe id="youtube-player" width="0" height="0" src="https://www.youtube.com/embed/DZjkcvHdxc8?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            <button onclick="toggleMusic()" id="music-toggle">Play Background Music</button>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 1}s`);
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create cosmic dust
+        function createCosmicDust() {
+            const container = document.querySelector('.container');
+            const numberOfParticles = 50;
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                const dust = document.createElement('div');
+                dust.className = 'cosmic-dust';
+                dust.style.left = `${Math.random() * 100}%`;
+                dust.style.animationDelay = `${Math.random() * 20}s`;
+                dust.style.opacity = Math.random();
+                container.appendChild(dust);
+            }
+        }
+
+        // YouTube Player API
+        let player;
+        let isPlaying = false;
+        const musicToggle = document.getElementById('music-toggle');
+
+        // Load YouTube API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player is ready
+            player.setVolume(50); // Set volume to 50%
+        }
+
+        function onPlayerStateChange(event) {
+            // When video ends (state = 0), replay it
+            if (event.data === 0) {
+                player.playVideo();
+            }
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                player.pauseVideo();
+                musicToggle.textContent = 'Play Background Music';
+            } else {
+                player.playVideo();
+                musicToggle.textContent = 'Pause Music';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Create meteor shower
+        function createMeteors() {
+            const meteorShower = document.querySelector('.meteor-shower');
+            
+            function createMeteor() {
+                const meteor = document.createElement('div');
+                meteor.className = 'meteor';
+                
+                // Random starting positions with wider range
+                const angle = Math.random() * 30 - 65; // Angle between -65 and -35 degrees
+                const angleRad = (angle * Math.PI) / 180;
+                const speed = Math.random() * 2 + 0.5; // Increased speed range
+                
+                // Calculate start and end positions
+                const startX = Math.random() * window.innerWidth * 1.5; // Wider start area
+                const startY = -150; // Start higher above viewport
+                const distance = Math.random() * 1000 + 500; // Longer travel distance
+                const endX = startX + (distance * Math.cos(angleRad));
+                const endY = startY + (distance * Math.sin(angleRad));
+                
+                meteor.style.setProperty('--startX', startX);
+                meteor.style.setProperty('--startY', startY);
+                meteor.style.setProperty('--endX', endX);
+                meteor.style.setProperty('--endY', endY);
+                meteor.style.setProperty('--angle', `${angle}deg`);
+                
+                // Random size with chance for large meteors
+                const isLarge = Math.random() < 0.2; // 20% chance for large meteors
+                if (isLarge) {
+                    meteor.classList.add('large');
+                } else {
+                    const size = Math.random() * 4 + 2;
+                    const length = Math.random() * 50 + 20;
+                    meteor.style.width = `${length}px`;
+                    meteor.style.height = `${size}px`;
+                }
+                
+                meteor.style.boxShadow = isLarge ? 
+                    '0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(157, 78, 221, 0.6)' :
+                    `0 0 ${size * 2}px rgba(255, 255, 255, 0.8)`;
+                
+                // Random duration based on speed
+                const duration = (Math.random() * 0.7 + 0.3) / speed;
+                meteor.style.animation = `meteor ${duration}s linear`;
+                
+                meteorShower.appendChild(meteor);
+
+                setTimeout(() => {
+                    meteor.remove();
+                }, duration * 1000);
+            }
+            
+            // Create meteors more frequently
+            setInterval(createMeteor, 200); // Create a new meteor every 200ms
+            
+            // Create initial batch of meteors
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createMeteor, Math.random() * 1000);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            createStars();
+            createCosmicDust();
+            createMeteors();
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        document.querySelectorAll('.project-card, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Custom Cursor
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursor = document.querySelector('.custom-cursor');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+
+            // Add hover effect on interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .project-card, .timeline-item');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                });
+                });
+            });
+
+        // Add particle effect to profile section
+        function createParticles() {
+            const profileSection = document.querySelector('.profile-section');
+            
+            profileSection.addEventListener('mousemove', (e) => {
+                const rect = profileSection.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.setProperty('--x', (Math.random() * 100 - 50) + 'px');
+                particle.style.setProperty('--y', (Math.random() * 100 - 50) + 'px');
+                
+                profileSection.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 3000);
+            });
+        }
+
+        // Initialize particle effect
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate elements when they come into view
+            const animatedElements = document.querySelectorAll('[data-aos]');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Handle image clicks for enlargement
+            const images = document.querySelectorAll('.image-container');
+            images.forEach(container => {
+                container.addEventListener('click', () => {
+                    const img = container.querySelector('img');
+                    const modal = document.createElement('div');
+                    modal.className = 'image-modal';
+                    modal.innerHTML = `
+                        <div class="modal-content">
+                            <img src="${img.src}" alt="${img.alt}">
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal || e.target.closest('.close-modal')) {
+                            modal.remove();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
 
